@@ -1,0 +1,11 @@
+---
+ - hosts: server2
+   remote_user: ansible_user
+   become: yes
+   tasks:
+        - name: installing httpd
+          yum: name=httpd state=present
+        - name: copy index.html
+          copy: src=index.html dest=/var/www/html
+        - name: restart httpd
+          service: name=httpd state=restarted enabled=yes
